@@ -652,44 +652,37 @@ class PHPTAL
      */
     public function execute()
     {
-        try
-        {
-            if (!$this->_prepared) {
-                // includes generated template PHP code
-                $this->prepare();
-            }
-            $this->_context->echoDeclarations(false);
+        if (!$this->_prepared) {
+            // includes generated template PHP code
+            $this->prepare();
+        }
+        $this->_context->echoDeclarations(false);
 
-            $templateFunction = $this->getFunctionName();
+        $templateFunction = $this->getFunctionName();
 
-            try {
-                ob_start();
-                $templateFunction($this, $this->_context);
-                $res = ob_get_clean();
-            }
-            catch (Exception $e)
-            {
-                ob_end_clean();
-                throw $e;
-            }
-
-            // unshift doctype
-            if ($this->_context->_docType) {
-                $res = $this->_context->_docType . $res;
-            }
-
-            // unshift xml declaration
-            if ($this->_context->_xmlDeclaration) {
-                $res = $this->_context->_xmlDeclaration . "\n" . $res;
-            }
-
-            if ($this->_postfilter) {
-                return $this->_postfilter->filter($res);
-            }
+        try {
+            ob_start();
+            $templateFunction($this, $this->_context);
+            $res = ob_get_clean();
         }
         catch (Exception $e)
         {
-            PHPTAL_ExceptionHandler::handleException($e, $this->getEncoding());
+            ob_end_clean();
+            throw $e;
+        }
+
+        // unshift doctype
+        if ($this->_context->_docType) {
+            $res = $this->_context->_docType . $res;
+        }
+
+        // unshift xml declaration
+        if ($this->_context->_xmlDeclaration) {
+            $res = $this->_context->_xmlDeclaration . "\n" . $res;
+        }
+
+        if ($this->_postfilter) {
+            return $this->_postfilter->filter($res);
         }
 
         return $res;
