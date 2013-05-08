@@ -1,5 +1,5 @@
 {
-    "name": "phptal/phptal",
+    "name": "Fabrica/PHPTAL",
     "homepage": "http://phptal.org/",
     "description": "PHPTAL is a templating engine for PHP5 that implements Zope Page Templates syntax",
     "version":"1.2.2",
@@ -20,6 +20,11 @@
             "name": "Kornel Lesiński",
             "email": "kornel@geekhood.net",
             "homepage": "http://pornel.net/"
+        },
+        {
+            "name": "Evgeniy Shershnev",
+            "email": "joshuan.chel@gmail.com",
+            "homepage": "http://joshuan.ru/"
         }
     ],
     "require": {
